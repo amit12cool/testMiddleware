@@ -4,13 +4,15 @@ import { AppService } from './app.service';
 import { RequestBodyParserMiddleware } from './middlewares/request-body-parser.middleware';
 
 @Module({
-  imports: [],
+  imports: [
+   
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
+  async configure(consumer: MiddlewareConsumer) {
+    await consumer
       .apply(RequestBodyParserMiddleware)
       .forRoutes({
         path: '/cats',
